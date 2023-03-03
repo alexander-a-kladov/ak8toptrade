@@ -1,0 +1,177 @@
+<html> <head>
+  <meta charset="utf-8">
+  <title>Альбомы Ak8</title>
+ </head>
+<style>
+body {
+ background-image: url("images/Karn.jpg");
+ background-color: #ffffff;
+}
+#container { 
+        height:300px;
+        width:160px;
+        background:#ffffff; 
+        position:relative;
+        float:left; 
+        margin: 0 0 0 0; 
+        text-align:center;
+        padding: 5px;
+        }
+h2 	{
+	position:absolute;
+	top:150px;
+	left:0;
+	width:100%;
+	}
+h2 span {
+	color			: black;
+	font			: bold 24px/45px Helvetica, Sans-Serif;
+	letter-spacing		: -1px;
+	background		: rgb(255, 255, 255); /* на случай, если следующая строка не сработает */
+	background		: rgba(255, 255, 255, 0.7);
+	padding			: 10px;
+}
+#line { 
+        background:#ffffff;   
+        text-align:left;
+	clear: both;
+        word-break: break-all;
+        }
+</style>
+<body><p><a href=https://topdeck.ru/forums/topic/169221-%D0%BF%D1%80%D0%BE%D0%B4%D0%B0%D0%BC-%D0%BA%D0%B0%D1%80%D1%82%D1%8B-%D0%B2-%D1%81%D1%82%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D1%82-%D0%B8-%D0%B2%D0%B5%D1%87%D0%BD%D1%8B%D0%B5-%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D1%8B target="_blank">Торговая Тема</a>
+<a style="margin-left: 20px" href=https://topdeck.ru/messenger/compose/?to=10345 target="_blank">Сообщение</a>
+<a style="margin-left: 40px" href=https://vk.com/ak8ak8 target="_blank">Вконтакте</a></p>
+<p><details>
+<summary><b>Инструкция</b></summary>
+<p><b>"Торговая тема"</b> - переход в торговую тему topdeck.ru </p>
+<p><b>"Сообщение"</b> - переход на форму сообщения для покупки topdeck.ru </p>
+<p><b>"Вконтакте"</b> - переход на страницу Вконтакте </p>
+<p><b>Клик на изображение карты</b> - переход на поиск карт с названием карты topdeck.ru </p>
+<p><b>Ctrl (удерживание после клика) + Клик на изображение карты</b> - переход на поиск карты c названием карты mtggoldfish.com </p>
+</details></p>
+<script type="text/javascript">
+var lastResFind=""; // последний удачный результат
+var copy_page=""; // копия страницы в исходном виде
+var input;
+
+function TrimStr(s) {
+     s = s.replace( /^\s+/g, '');
+  return s.replace( /\s+$/g, '');
+}
+
+function toggleSpoilers() {
+  var spoilers = [].slice.call(document.querySelectorAll('summary'));
+  delete spoilers[0];
+  spoilers.forEach(function(node) {
+  node.click();
+  });
+}
+
+function registerEnterHandler() {
+input = document.getElementById("text-to-find");
+input.addEventListener("keyup", function(event) {
+  // Число 13 в "Enter" и клавиши на клавиатуре
+  if (event.keyCode === 13) {
+    // При необходимости отмените действие по умолчанию
+    event.preventDefault();
+    // Вызов элемента button одним щелчком мыши
+    document.getElementById("find-button").click();
+  }
+});
+}
+
+function FindOnPage(inputId) {//ищет текст на странице, в параметр передается ID поля для ввода
+  var obj = window.document.getElementById(inputId);
+  var textToFind;
+ 
+  if (obj) {
+    textToFind = TrimStr(obj.value);//обрезаем пробелы
+  } else {
+    alert("Введенная фраза не найдена");
+    return;
+  }
+  if (textToFind == "") {
+    alert("Вы ничего не ввели");
+    return;
+  }
+ 
+  if(document.body.innerHTML.indexOf(textToFind)=="-1")
+  alert("Ничего не найдено, проверьте правильность ввода!");
+ 
+  toggleSpoilers();
+
+  if(copy_page.length>0)
+        document.body.innerHTML=copy_page;
+  else copy_page=document.body.innerHTML;
+
+ 
+  document.body.innerHTML = document.body.innerHTML.replace(eval("/name="+lastResFind+"/gi")," ");//стираем предыдущие якори для скрола
+  document.body.innerHTML = document.body.innerHTML.replace(eval("/"+textToFind+"/gi"),"<a name="+textToFind+" style='background:red'>"+textToFind+"</a>"); //Заменяем найденный текст ссылками с якорем;
+  lastResFind=textToFind; // сохраняем фразу для поиска, чтобы в дальнейшем по ней стереть все ссылки
+  window.location = '#'+textToFind;//перемещаем скрол к последнему найденному совпадению
+  window.scrollBy(0,-350);
+  registerEnterHandler()
+ }
+
+ // Выполнение функции, когда пользователь отпускает клавишу на клавиатуре
+window.onload = registerEnterHandler
+</script>
+
+<p>Поиск по странице</p>
+<input type="text" id="text-to-find" value="">
+<input type="button" id="find-button" onclick="javascript: FindOnPage('text-to-find'); return false;" value="Искать"/>
+<br/><i>Введите слово или фразу для поиска.</i>
+<hr/>
+
+
+<script>function comparePrice(name,en_name) {
+    if (event.ctrlKey) {
+    var re=/\+/gi
+    window.open("https://www.mtggoldfish.com/q?utf8=%E2%9C%93&query_string="+en_name.replace('+',' '),"_blank")
+    } 
+    else {
+    window.open("https://topdeck.ru/apps/toptrade/singles/search?q="+name,"_blank")
+    }
+}
+</script><div id="container"> <img src=https://cards.scryfall.io/small/front/6/4/64f7a506-0aa1-4c2d-b322-e0e9179d05fb.jpg?1654566199 alt="Brilliant Restoration" height="230px" onclick=comparePrice("Brilliant+Restoration","Brilliant+Restoration")><h2><span>    52 р</span></h2><p>Brilliant Restoration - <wbr>(NEO/7)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/a/1/a13ddda7-da6e-415e-8886-295514f862d4.jpg?1654566199 alt="Cloudsteel Kirin" height="230px" onclick=comparePrice("Cloudsteel+Kirin","Cloudsteel+Kirin")><h2><span>    37 р</span></h2><p>Cloudsteel Kirin - <wbr>(NEO/8)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/3/a/3a598ab6-3254-49fe-b69f-e7c759129599.jpg?1654566346 alt="Invoke Justice" height="230px" onclick=comparePrice("Invoke+Justice","Invoke+Justice")><h2><span>    21 р</span></h2><p>Invoke Justice - <wbr>(NEO/21)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/c/b/cbbfd21e-96f1-4e5b-8546-73bb5a887b98.jpg?1654566369 alt="Kyodai, Soul of Kamigawa" height="230px" onclick=comparePrice("Kyodai,+Soul+of+Kamigawa","Kyodai,+Soul+of+Kamigawa")><h2><span>    27 р</span></h2><p>Kyodai, Soul of Kamigawa - <wbr>(NEO/23)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/e/a/ea6d3242-8059-4203-aa06-58a6a3925eda.jpg?1656615308 alt="Inventive Iteration" height="230px" onclick=comparePrice("Inventive+Iteration","Inventive+Iteration")><h2><span>    27 р</span></h2><p>Inventive Iteration - <wbr>(NEO/57)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/a/d/ad7b423a-bfd1-47aa-bd2c-64a169b96924.jpg?1654566747 alt="Invoke the Winds" height="230px" onclick=comparePrice("Invoke+the+Winds","Invoke+the+Winds")><h2><span>    18 р</span></h2><p>Invoke the Winds - <wbr>(NEO/58)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/2/8/28273a5b-57b3-4b7a-b017-5886c171c9c9.jpg?1654566784 alt="Mindlink Mech" height="230px" onclick=comparePrice("Mindlink+Mech","Mindlink+Mech")><h2><span>    15 р</span></h2><p>Mindlink Mech - <wbr>(NEO/62)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/2/6/26594b52-3e9c-4cde-88df-1f4e9e16676e.jpg?1654566985 alt="Tameshi, Reality Architect" height="230px" onclick=comparePrice("Tameshi,+Reality+Architect","Tameshi,+Reality+Architect")><h2><span>    34 р</span></h2><p>Tameshi, Reality Architect - <wbr>(NEO/82)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/3/0/3017df51-67ae-4c3d-8210-086f83bc2040.jpg?1654567052 alt="Biting-Palm Ninja" height="230px" onclick=comparePrice("Biting-Palm+Ninja","Biting-Palm+Ninja")><h2><span>    37 р</span></h2><p>Biting-Palm Ninja - <wbr>(NEO/88)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/6/f/6f4142d3-f7ca-4613-a6e5-528cf1f22383.jpg?1654567158 alt="Hidetsugu, Devouring Chaos" height="230px" onclick=comparePrice("Hidetsugu,+Devouring+Chaos","Hidetsugu,+Devouring+Chaos")><h2><span>    18 р</span></h2><p>Hidetsugu, Devouring Chaos - <wbr>(NEO/99)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/0/5/050a604e-6146-4e2e-88a5-863ecb3dfa1f.jpg?1654567293 alt="March of Wretched Sorrow" height="230px" onclick=comparePrice("March+of+Wretched+Sorrow","March+of+Wretched+Sorrow")><h2><span>    27 р</span></h2><p>March of Wretched Sorrow - <wbr>(NEO/111)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/1/6/166775be-c3b7-4a17-9376-aa4229b147f9.jpg?1654567314 alt="Mukotai Soulripper" height="230px" onclick=comparePrice("Mukotai+Soulripper","Mukotai+Soulripper")><h2><span>    15 р</span></h2><p>Mukotai Soulripper - <wbr>(NEO/113)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/1/e/1e5aba90-c8c7-4f06-b7b3-1b4758d2791a.jpg?1654567411 alt="Soul Transfer" height="230px" onclick=comparePrice("Soul+Transfer","Soul+Transfer")><h2><span>    24 р</span></h2><p>Soul Transfer - <wbr>(NEO/122)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/a/b/abf42833-43d0-4b05-b499-d13b2c577ee8.jpg?1654567411 alt="Tatsunari, Toad Rider" height="230px" onclick=comparePrice("Tatsunari,+Toad+Rider","Tatsunari,+Toad+Rider")><h2><span>    18 р</span></h2><p>Tatsunari, Toad Rider - <wbr>(NEO/123)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/5/4/54613f38-ca91-4764-b1fe-60cd83707fb4.jpg?1656453216 alt="Tribute to Horobi" height="230px" onclick=comparePrice("Tribute+to+Horobi","Tribute+to+Horobi")><h2><span>    18 р</span></h2><p>Tribute to Horobi - <wbr>(NEO/124)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/e/6/e6cdd822-44a1-4d58-9de4-69fc56eae255.jpg?1654567601 alt="Explosive Singularity" height="230px" onclick=comparePrice("Explosive+Singularity","Explosive+Singularity")><h2><span>    40 р</span></h2><p>Explosive Singularity - <wbr>(NEO/140)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/1/c/1ca736c7-35a9-48c7-b5a9-69b2a6e33ad0.jpg?1654567661 alt="Goro-Goro, Disciple of Ryusei" height="230px" onclick=comparePrice("Goro-Goro,+Disciple+of+Ryusei","Goro-Goro,+Disciple+of+Ryusei")><h2><span>    58 р</span></h2><p>Goro-Goro, Disciple of Ryusei - <wbr>(NEO/145)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/f/e/fe666c86-6734-4c47-9244-bcd26b54068d.jpg?1654567682 alt="Invoke Calamity" height="230px" onclick=comparePrice("Invoke+Calamity","Invoke+Calamity")><h2><span>    27 р</span></h2><p>Invoke Calamity - <wbr>(NEO/147)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/a/7/a747e6cf-c687-4c4f-8e07-d51165d6cb62.jpg?1654567747 alt="Lizard Blades" height="230px" onclick=comparePrice("Lizard+Blades","Lizard+Blades")><h2><span>    94 р</span></h2><p>Lizard Blades - <wbr>(NEO/153)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/7/8/780e1bf1-e392-40f2-9e84-764dedc5fcd4.jpg?1654567748 alt="March of Reckless Joy" height="230px" onclick=comparePrice("March+of+Reckless+Joy","March+of+Reckless+Joy")><h2><span>    24 р</span></h2><p>March of Reckless Joy - <wbr>(NEO/154)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/3/a/3a0d5f7d-4e8a-42ad-8875-610004bd9796.jpg?1654567765 alt="Ogre-Head Helm" height="230px" onclick=comparePrice("Ogre-Head+Helm","Ogre-Head+Helm")><h2><span>    15 р</span></h2><p>Ogre-Head Helm - <wbr>(NEO/155)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/1/4/14057067-2325-4229-8580-d9a6397ae343.jpg?1654567802 alt="Scrap Welder" height="230px" onclick=comparePrice("Scrap+Welder","Scrap+Welder")><h2><span>    21 р</span></h2><p>Scrap Welder - <wbr>(NEO/159)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/e/c/ec1a2920-6d39-4276-921c-65cc16a45f17.jpg?1654567892 alt="Thundering Raiju" height="230px" onclick=comparePrice("Thundering+Raiju","Thundering+Raiju")><h2><span>    37 р</span></h2><p>Thundering Raiju - <wbr>(NEO/166)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/2/5/2534caaa-a793-415f-977f-1d0fac3642ab.jpg?1654626219 alt="The Dragon-Kami Reborn" height="230px" onclick=comparePrice("The+Dragon-Kami+Reborn","The+Dragon-Kami+Reborn")><h2><span>    27 р</span></h2><p>The Dragon-Kami Reborn - <wbr>(NEO/181)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/b/5/b5c02102-3be7-462f-ab9c-ff404255002d.jpg?1654568175 alt="Invoke the Ancients" height="230px" onclick=comparePrice("Invoke+the+Ancients","Invoke+the+Ancients")><h2><span>    9 р</span></h2><p>Invoke the Ancients - <wbr>(NEO/193)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/7/d/7d038a59-e589-45f4-b5ef-6d2f9875d560.jpg?1654568218 alt="Kami of Transience" height="230px" onclick=comparePrice("Kami+of+Transience","Kami+of+Transience")><h2><span>    58 р</span></h2><p>Kami of Transience - <wbr>(NEO/197)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/0/e/0e223d99-408a-413d-abb1-cb2f11ae521d.jpg?1654568257 alt="March of Burgeoning Life" height="230px" onclick=comparePrice("March+of+Burgeoning+Life","March+of+Burgeoning+Life")><h2><span>    46 р</span></h2><p>March of Burgeoning Life - <wbr>(NEO/201)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/5/2/52a16623-7e6d-405b-95db-bf18aeea3f49.jpg?1654568313 alt="Shigeki, Jukai Visionary" height="230px" onclick=comparePrice("Shigeki,+Jukai+Visionary","Shigeki,+Jukai+Visionary")><h2><span>    37 р</span></h2><p>Shigeki, Jukai Visionary - <wbr>(NEO/206)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/7/4/74b1ba9c-ee62-461f-8422-f791274e2f1c.jpg?1654568333 alt="Spring-Leaf Avenger" height="230px" onclick=comparePrice("Spring-Leaf+Avenger","Spring-Leaf+Avenger")><h2><span>    21 р</span></h2><p>Spring-Leaf Avenger - <wbr>(NEO/208)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/4/c/4c0c6c2a-4352-4c65-b41d-2a722bbef6c5.jpg?1656615983 alt="Teachings of the Kirin" height="230px" onclick=comparePrice("Teachings+of+the+Kirin","Teachings+of+the+Kirin")><h2><span>    18 р</span></h2><p>Teachings of the Kirin - <wbr>(NEO/212)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/3/5/35203138-5237-49aa-a335-7a32829548a1.jpg?1654568415 alt="Eiganjo Uprising" height="230px" onclick=comparePrice("Eiganjo+Uprising","Eiganjo+Uprising")><h2><span>    9 р</span></h2><p>Eiganjo Uprising - <wbr>(NEO/217)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/f/2/f25aff90-56fd-4f70-bb3b-cabf2900c391.jpg?1654568472 alt="Hinata, Dawn-Crowned" height="230px" onclick=comparePrice("Hinata,+Dawn-Crowned","Hinata,+Dawn-Crowned")><h2><span>    9 р</span></h2><p>Hinata, Dawn-Crowned - <wbr>(NEO/222)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/a/0/a062a004-984e-4b62-960c-af7288f7a3e9.jpg?1654568489 alt="Isshin, Two Heavens as One" height="230px" onclick=comparePrice("Isshin,+Two+Heavens+as+One","Isshin,+Two+Heavens+as+One")><h2><span>    40 р</span></h2><p>Isshin, Two Heavens as One - <wbr>(NEO/224)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/3/1/314e97b5-cd43-4f5e-acdd-a107208e061c.jpg?1654568534 alt="Kotose, the Silent Spider" height="230px" onclick=comparePrice("Kotose,+the+Silent+Spider","Kotose,+the+Silent+Spider")><h2><span>    18 р</span></h2><p>Kotose, the Silent Spider - <wbr>(NEO/228)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/3/7/37748b74-0eda-4b20-a08f-faa418adb9ff.jpg?1654568575 alt="Raiyuu, Storm's Edge" height="230px" onclick=comparePrice("Raiyuu,+Storm's+Edge","Raiyuu,+Storm's+Edge")><h2><span>    27 р</span></h2><p>Raiyuu, Storm's Edge - <wbr>(NEO/232)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/5/1/51d8f1fa-ca92-4e2e-91e8-195bdad82def.jpg?1654568577 alt="Risona, Asari Commander" height="230px" onclick=comparePrice("Risona,+Asari+Commander","Risona,+Asari+Commander")><h2><span>    40 р</span></h2><p>Risona, Asari Commander - <wbr>(NEO/233)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/8/8/8887f26d-b097-4fbc-9c48-bdc656409a32.jpg?1654568594 alt="Satoru Umezawa" height="230px" onclick=comparePrice("Satoru+Umezawa","Satoru+Umezawa")><h2><span>    40 р</span></h2><p>Satoru Umezawa - <wbr>(NEO/234)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/0/1/0152575b-31b0-4142-9cc2-b87a81bd51a8.jpg?1654568597 alt="Satsuki, the Living Lore" height="230px" onclick=comparePrice("Satsuki,+the+Living+Lore","Satsuki,+the+Living+Lore")><h2><span>    15 р</span></h2><p>Satsuki, the Living Lore - <wbr>(NEO/235)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/f/0/f094735f-5843-4f75-bc90-3e248a061a43.jpg?1654568621 alt="Spirit-Sister's Call" height="230px" onclick=comparePrice("Spirit-Sister's+Call","Spirit-Sister's+Call")><h2><span>    37 р</span></h2><p>Spirit-Sister's Call - <wbr>(NEO/237)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/3/4/34d92077-d7b2-4996-848f-fd4917e2fb42.jpg?1655144364 alt="Eater of Virtue" height="230px" onclick=comparePrice("Eater+of+Virtue","Eater+of+Virtue")><h2><span>    30 р</span></h2><p>Eater of Virtue - <wbr>(NEO/245)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/c/a/ca286ba9-01a7-4dce-b388-177f5dcb95b1.jpg?1654568740 alt="Mechtitan Core" height="230px" onclick=comparePrice("Mechtitan+Core","Mechtitan+Core")><h2><span>    27 р</span></h2><p>Mechtitan Core - <wbr>(NEO/249)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/3/c/3c4bf679-01cc-4786-a3bd-89c8ae70fdfa.jpg?1654568854 alt="Surgehacker Mech" height="230px" onclick=comparePrice("Surgehacker+Mech","Surgehacker+Mech")><h2><span>    27 р</span></h2><p>Surgehacker Mech - <wbr>(NEO/260)<wbr><wbr></p></div>
