@@ -1,0 +1,146 @@
+<html> <head>
+  <meta charset="utf-8">
+  <title>Альбомы Ak8</title>
+ </head>
+<style>
+body {
+ background-image: url("images/Karn.jpg");
+ background-color: #ffffff;
+}
+#container { 
+        height:300px;
+        width:160px;
+        background:#ffffff; 
+        position:relative;
+        float:left; 
+        margin: 0 0 0 0; 
+        text-align:center;
+        padding: 5px;
+        }
+h2 	{
+	position:absolute;
+	top:150px;
+	left:0;
+	width:100%;
+	}
+h2 span {
+	color			: black;
+	font			: bold 24px/45px Helvetica, Sans-Serif;
+	letter-spacing		: -1px;
+	background		: rgb(255, 255, 255); /* на случай, если следующая строка не сработает */
+	background		: rgba(255, 255, 255, 0.7);
+	padding			: 10px;
+}
+#line { 
+        background:#ffffff;   
+        text-align:left;
+	clear: both;
+        word-break: break-all;
+        }
+</style>
+<body><p><a href=https://topdeck.ru/forums/topic/169221-%D0%BF%D1%80%D0%BE%D0%B4%D0%B0%D0%BC-%D0%BA%D0%B0%D1%80%D1%82%D1%8B-%D0%B2-%D1%81%D1%82%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D1%82-%D0%B8-%D0%B2%D0%B5%D1%87%D0%BD%D1%8B%D0%B5-%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D1%8B target="_blank">Торговая Тема</a>
+<a style="margin-left: 20px" href=https://topdeck.ru/messenger/compose/?to=10345 target="_blank">Сообщение</a>
+<a style="margin-left: 40px" href=https://vk.com/ak8ak8 target="_blank">Вконтакте</a></p>
+<p><details>
+<summary><b>Инструкция</b></summary>
+<p><b>"Торговая тема"</b> - переход в торговую тему topdeck.ru </p>
+<p><b>"Сообщение"</b> - переход на форму сообщения для покупки topdeck.ru </p>
+<p><b>"Вконтакте"</b> - переход на страницу Вконтакте </p>
+<p><b>Клик на изображение карты</b> - переход на поиск карт с названием карты topdeck.ru </p>
+<p><b>Ctrl (удерживание после клика) + Клик на изображение карты</b> - переход на поиск карты c названием карты mtggoldfish.com </p>
+</details></p>
+<script type="text/javascript">
+var lastResFind=""; // последний удачный результат
+var copy_page=""; // копия страницы в исходном виде
+var input;
+
+function TrimStr(s) {
+     s = s.replace( /^\s+/g, '');
+  return s.replace( /\s+$/g, '');
+}
+
+function toggleSpoilers() {
+  var spoilers = [].slice.call(document.querySelectorAll('summary'));
+  delete spoilers[0];
+  spoilers.forEach(function(node) {
+  node.click();
+  });
+}
+
+function registerEnterHandler() {
+input = document.getElementById("text-to-find");
+input.addEventListener("keyup", function(event) {
+  // Число 13 в "Enter" и клавиши на клавиатуре
+  if (event.keyCode === 13) {
+    // При необходимости отмените действие по умолчанию
+    event.preventDefault();
+    // Вызов элемента button одним щелчком мыши
+    document.getElementById("find-button").click();
+  }
+});
+}
+
+function FindOnPage(inputId) {//ищет текст на странице, в параметр передается ID поля для ввода
+  var obj = window.document.getElementById(inputId);
+  var textToFind;
+ 
+  if (obj) {
+    textToFind = TrimStr(obj.value);//обрезаем пробелы
+  } else {
+    alert("Введенная фраза не найдена");
+    return;
+  }
+  if (textToFind == "") {
+    alert("Вы ничего не ввели");
+    return;
+  }
+ 
+  if(document.body.innerHTML.indexOf(textToFind)=="-1")
+  alert("Ничего не найдено, проверьте правильность ввода!");
+ 
+  toggleSpoilers();
+
+  if(copy_page.length>0)
+        document.body.innerHTML=copy_page;
+  else copy_page=document.body.innerHTML;
+
+ 
+  document.body.innerHTML = document.body.innerHTML.replace(eval("/name="+lastResFind+"/gi")," ");//стираем предыдущие якори для скрола
+  document.body.innerHTML = document.body.innerHTML.replace(eval("/"+textToFind+"/gi"),"<a name="+textToFind+" style='background:red'>"+textToFind+"</a>"); //Заменяем найденный текст ссылками с якорем;
+  lastResFind=textToFind; // сохраняем фразу для поиска, чтобы в дальнейшем по ней стереть все ссылки
+  window.location = '#'+textToFind;//перемещаем скрол к последнему найденному совпадению
+  window.scrollBy(0,-350);
+  registerEnterHandler()
+ }
+
+ // Выполнение функции, когда пользователь отпускает клавишу на клавиатуре
+window.onload = registerEnterHandler
+</script>
+
+<p>Поиск по странице</p>
+<input type="text" id="text-to-find" value="">
+<input type="button" id="find-button" onclick="javascript: FindOnPage('text-to-find'); return false;" value="Искать"/>
+<br/><i>Введите слово или фразу для поиска.</i>
+<hr/>
+
+
+<script>function comparePrice(name,en_name) {
+    if (event.ctrlKey) {
+    var re=/\+/gi
+    window.open("https://www.mtggoldfish.com/q?utf8=%E2%9C%93&query_string="+en_name.replace('+',' '),"_blank")
+    } 
+    else {
+    window.open("https://topdeck.ru/apps/toptrade/singles/search?q="+name,"_blank")
+    }
+}
+</script><div id="container"> <img src=https://cards.scryfall.io/small/front/5/6/56444440-a9e6-4583-a289-9f0571a98093.jpg?1675956894 alt="Duelist of Deep Faith" height="230px" onclick=comparePrice("Duelist+of+Deep+Faith","Duelist+of+Deep+Faith")><h2><span>    6 р</span></h2><p>Duelist of Deep Faith - <wbr>(ONE/9)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/3/0/3006ea5a-5391-41eb-b0c8-092741dca2eb.jpg?1675956918 alt="Mirran Bardiche" height="230px" onclick=comparePrice("Mirran+Bardiche","Mirran+Bardiche")><h2><span>    3 р</span></h2><p>Mirran Bardiche - <wbr>(ONE/22)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/2/8/28f48394-c6aa-4453-954a-68195d9bd6ea.jpg?1675957030 alt="Gulping Scraptrap" height="230px" onclick=comparePrice("Gulping+Scraptrap","Gulping+Scraptrap")><h2><span>    10 р</span></h2><p>Gulping Scraptrap - <wbr>(ONE/96)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/8/c/8c6b818f-6912-4ea1-a35a-c8cd7ee9aead.jpg?1675957050 alt="Sheoldred's Headcleaver" height="230px" onclick=comparePrice("Sheoldred's+Headcleaver","Sheoldred's+Headcleaver")><h2><span>    10 р</span></h2><p>Sheoldred's Headcleaver - <wbr>(ONE/109)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/c/d/cdbbcbe1-5317-455e-8d71-a4e2ad0addfc.jpg?1675957053 alt="Stinging Hivemaster" height="230px" onclick=comparePrice("Stinging+Hivemaster","Stinging+Hivemaster")><h2><span>    10 р</span></h2><p>Stinging Hivemaster - <wbr>(ONE/110)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/c/9/c9b3b785-396e-4240-bfa3-58ab53497686.jpg?1675957067 alt="Axiom Engraver" height="230px" onclick=comparePrice("Axiom+Engraver","Axiom+Engraver")><h2><span>    3 р</span></h2><p>Axiom Engraver - <wbr>(ONE/120)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/7/3/73d74045-cc9b-4b01-bc5f-0f2eb4b01580.jpg?1675957122 alt="Volt Charge" height="230px" onclick=comparePrice("Volt+Charge","Volt+Charge")><h2><span>    13 р</span></h2><p>Volt Charge - <wbr>(ONE/155)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/e/5/e5290a4c-1f98-4e97-a407-f951e386b8b0.jpg?1675957129 alt="Branchblight Stalker" height="230px" onclick=comparePrice("Branchblight+Stalker","Branchblight+Stalker")><h2><span>    19 р</span></h2><p>Branchblight Stalker - <wbr>(ONE/160)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/3/5/3583ea03-525f-4c70-9d7e-ccc6002ee9e1.jpg?1675957169 alt="Titanic Growth" height="230px" onclick=comparePrice("Titanic+Growth","Titanic+Growth")><h2><span>    6 р</span></h2><p>Titanic Growth - <wbr>(ONE/187)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/8/e/8e2f0ae2-db68-4338-93f9-9d9268cec41e.jpg?1675957224 alt="Basilica Skullbomb" height="230px" onclick=comparePrice("Basilica+Skullbomb","Basilica+Skullbomb")><h2><span>    6 р</span></h2><p>Basilica Skullbomb - <wbr>(ONE/224)<wbr><wbr></p></div>
+<div id="container"> <img src=https://cards.scryfall.io/small/front/5/a/5adceb34-78c7-40dd-af31-6fb282d577ca.jpg?1675957283 alt="Terramorphic Expanse" height="230px" onclick=comparePrice("Terramorphic+Expanse","Terramorphic+Expanse")><h2><span>    10 р</span></h2><p>Terramorphic Expanse - <wbr>(ONE/261)<wbr><wbr></p></div>
